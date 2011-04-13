@@ -11,36 +11,38 @@ class CommentTest < ActiveSupport::TestCase
   end
   
   test "should be invalid" do
-    comment = Comment.create
+    comment = Comment.new
     assert !comment.valid?, "Comment shoudn't be created"
   end
   
   test "shouldn't accept nil body" do
-    comment = create(:body => nil)
+    comment = new(:body => nil)
+    comment.valid?
     assert comment.errors[:body].any?, ":body shoudn't be nil"
   end
   
   test "shouldn't accept short body value" do
-    comment = create(:body => "ab")
+    comment = new(:body => "ab")
+    comment.valid?
     assert comment.errors[:body].any?, "short :body shoudn't be accept"
   end
   
-  test "should create comment" do
-    user = User.find_or_create_by_email(email:"hboaventura@gmai.com", password:"123456")
-    recipe = user.recipes.create!(
+  test "should be a valid comment" do
+    user = User.new(:email => "hboaventura@gmai.com", :password => "123456")
+    recipe = user.recipes.new(
       name: "Teste de receita",
       description: "Teste de descrição da receita"
     )
     comment = recipe.comments.new(
       body: 'Teste de comentário'
     )
-    assert comment.save, "the comment should be created"
+    assert comment.valid?, "the comment should be valid"
   end
   
   private
   
-  def create(options={})
-    Comment.create({
+  def new(options={})
+    Comment.new({
       :body   => "Body",
       :user   => User.new,
       :recipe => Recipe.new

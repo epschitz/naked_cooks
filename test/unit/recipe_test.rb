@@ -8,54 +8,60 @@ class RecipeTest < ActiveSupport::TestCase
   end
   
   test "should be invalid" do
-    recipe = Recipe.create
+    recipe = Recipe.new
     assert !recipe.valid?, "Recipe shoudn't be created"
   end
   
   test "should require name" do
-    recipe = create(:name => nil)
+    recipe = new(:name => nil)
+    recipe.valid?
     assert recipe.errors[:name].any?, ":name should be required"
   end
   
   test "should require description" do
-    recipe = create(:description => nil)
+    recipe = new(:description => nil)
+    recipe.valid?
     assert recipe.errors[:description].any?, ":description should be required"
   end
   
   test "should require a longer description" do
-    recipe = create(:description => 'abc')
+    recipe = new(:description => 'abc')
+    recipe.valid?
     assert recipe.errors[:description].any?, "a longer :description should be required"
   end
   
   test "should require user" do
-    recipe = create(:user => nil)
+    recipe = new(:user => nil)
+    recipe.valid?
     assert recipe.errors[:user].any?, ":user should be required"
   end
   
   test "should require a longer name" do
-    recipe = create(:name => "a")
+    recipe = new(:name => "a")
+    recipe.valid?
     assert recipe.errors[:name].any?, "longer :name should be required"
   end
   
   test "should require a shorter name" do
-    recipe = create(:name => "a"*155)
+    recipe = new(:name => "a"*155)
+    recipe.valid?
     assert recipe.errors[:name].any?, "shorter :name should be required"
   end
   
   test "should create a recipe" do
-    user = User.find_or_create_by_email(email:'hboaventura@gmail.com', password:'123456')
+    user = User.find_or_create_by_email(:email => 'hboaventura@gmail.com', :password => '123456')
     recipe = user.recipes.new(
       name:"Teste de receita",
       description:"descricão da receita"
     )
     
-    assert recipe.save, "the recipe should be created"    
+    assert recipe.valid?, "the recipe should be created"    
   end
   
   private
   
-  def create(options={})
-    Recipe.create({
+  def new(options={})
+    Recipe.new({
       :name        => "Name",
       :image       => "Image",
       :description => "Description",
