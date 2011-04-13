@@ -9,7 +9,7 @@ class Favorite < ActiveRecord::Base
   validate :users_cant_be_equal
   
   def users_cant_be_equal
-    errors.add(:user, "User can't favorite his own recipe") unless user != recipe.user
+    errors.add(:user, "User can't favorite his own recipe") unless user_id != recipe_id
   end
   
 end

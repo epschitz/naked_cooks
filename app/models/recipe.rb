@@ -11,6 +11,6 @@ class Recipe < ActiveRecord::Base
   
   validates :name, :presence => true, :length => { :within => 3..150 }
   validates :description, :presence =>true, :length => { :minimum => 4 }
-  validates_presence_of :user
+  validates_presence_of :user_id
   
 end

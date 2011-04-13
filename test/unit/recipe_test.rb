@@ -33,7 +33,7 @@ class RecipeTest < ActiveSupport::TestCase
   test "should require user" do
     recipe = new(:user => nil)
     recipe.valid?
-    assert recipe.errors[:user].any?, ":user should be required"
+    assert recipe.errors[:user_id].any?, ":user should be required"
   end
   
   test "should require a longer name" do
