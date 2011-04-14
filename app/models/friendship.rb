@@ -13,3 +13,5 @@ class Friendship < ActiveRecord::Base
   end
 
 end
+
+# status  = pending, accepted, denied

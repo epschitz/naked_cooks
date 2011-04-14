@@ -29,6 +29,41 @@ class FriendshipTest < ActiveSupport::TestCase
     assert !friendship.valid?, "User shoudn't be friend of himself"
   end
   
+  test "should create a friendship waiting for authorizing" do
+    
+    user = User.find_or_create_by_email(:email => "hboaventura@gmail.com", :password => "123456")
+    friend = User.find_or_create_by_email(:email => "friendships@gmail.com", :password => "123456")
+    
+    friendship = user.friendships.new(friend:friend)
+        
+    assert friendship.valid?, "friendship should be valid"
+    assert friendship.status == "pending", "friendship should be waiting for acception"
+  end
+  
+  test "should create a friendship and authorize it" do
+    
+    user = User.find_or_create_by_email(:email => "hboaventura@gmail.com", :password => "123456")
+    friend = User.find_or_create_by_email(:email => "friendships@gmail.com", :password => "123456")
+    
+    friendship = user.friendships.new(friend:friend)
+    friendship.status = "accepted"
+        
+    assert friendship.valid?, "friendship should be valid"
+    assert friendship.status == "accepted", "friendship should be accepted"
+  end
+  
+  test "should create a friendship and deny it" do
+    
+    user = User.find_or_create_by_email(:email => "hboaventura@gmail.com", :password => "123456")
+    friend = User.find_or_create_by_email(:email => "friendships@gmail.com", :password => "123456")
+    
+    friendship = user.friendships.new(friend:friend)
+    friendship.status = "denied"
+        
+    assert friendship.valid?, "friendship should be valid"
+  assert friendship.status == "denied", "friendship shouldn't' be accepted"
+  end
+  
   def new(options={})
     Friendship.new({
       :user    => User.new,
