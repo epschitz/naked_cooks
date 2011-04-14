@@ -1,7 +1,9 @@
 NakedCooks::Application.routes.draw do
+  #devise_for :users, :controllers => { :password => "users/password" }
+
   devise_for :users
 
-  root :to => "home#index"
+  root :to => "categories#index"
   
   resources :categories
 

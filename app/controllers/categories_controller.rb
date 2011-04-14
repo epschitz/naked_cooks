@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
 
     respond_with @categories 
   end
-
+  
   # GET /categories/1
   # GET /categories/1.xml
   def show
