@@ -10,17 +10,14 @@
     <div id="container">
         <header>
             <h1>Naked Cooks</h1>
-            <small>Let's share our recipes</small>    
-            <nav>
-                
-            </nav>
-            <%= render(:partial => "devise/login_form") %>
+            <small>Let's share our recipes</small>   
         </header>
         <section>
             <%= yield %>
         </section>
         <footer>
             Naked Cooks &reg;
+            <%= render(:partial => 'pages/links') %>
         </footer>
     </div>
 </body>
