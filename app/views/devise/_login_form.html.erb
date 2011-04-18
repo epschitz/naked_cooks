@@ -1,0 +1,19 @@
+<% form_tag new_user_session_path do %>
+    <fieldset>
+        <legend>Sign in</legend>
+        <% if flash[:notice] %><p class="notice"><%= flash[:notice] %></p><% end %>
+        <% if flash[:alert] %><p class="error"><%= flash[:alert] %></p><% end %>
+
+        <%= label_tag 'user[email]', 'E-mail' %>
+        <%= text_field_tag 'user[email]' %>
+
+        <%= label_tag 'user[password]', 'Password' %>
+        <%= password_field_tag 'user[password]' %>
+
+        <%= link_to 'Forgot your password?', new_password_path(:user) %>
+
+        <%= submit_tag "Sign in", :name => "submit", :disable_with => "logando" %>
+        <%= label_tag :remember_me %>
+        <%= check_box_tag :remember_me %>        
+  </fieldset>
+<% end %>

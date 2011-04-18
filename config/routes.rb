@@ -3,7 +3,7 @@ NakedCooks::Application.routes.draw do
 
   devise_for :users
 
-  root :to => "categories#index"
+  root :to => "home#index"
   
   resources :categories
 
