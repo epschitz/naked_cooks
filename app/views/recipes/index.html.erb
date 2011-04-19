@@ -1,0 +1,23 @@
+<h1>Listing recipes</h1>
+<% if flash[:notice] %><p class="notice"><%= flash[:notice] %></p><% end %>
+<% if flash[:alert] %><p class="error"><%= flash[:alert] %></p><% end %>
+<table>
+  <tr>
+    <th>Recipe</th>
+    <th>Category</th>
+    <th></th>
+  </tr>
+
+<% @recipes.each do |recipe| %>
+  <tr>
+    <td><%= recipe.name %></td>
+    <td><%= recipe.category.name unless recipe.category.nil? %></td>
+    <td>
+      <%= link_to 'Show', recipe %>
+      <%= link_to 'Edit', edit_recipe_path(recipe) %>
+      <%= link_to 'Destroy', recipe, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<%= link_to 'New Recipe', new_recipe_path %>

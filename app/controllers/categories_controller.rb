@@ -68,12 +68,17 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.xml
   def destroy
-    @category = Category.find(params[:id])
-    @category.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(categories_url) }
-      format.xml  { head :ok }
+    category = Category.find(params[:id])
+    if category.destroy
+      flash[:notice] = 'The category was destroyed'
+    else 
+      flash[:alert] = 'The category could not be destroyed'
+    end
+    
+    respond_with [category, @category] do |format|
+      format.html{
+        redirect_to(categories_path)        
+      }
     end
   end
 end

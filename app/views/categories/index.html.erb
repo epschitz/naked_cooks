@@ -1,5 +1,6 @@
 <h1>Listing categories</h1>
-
+<% if flash[:notice] %><p class="notice"><%= flash[:notice] %></p><% end %>
+<% if flash[:alert] %><p class="error"><%= flash[:alert] %></p><% end %>
 <table>
   <tr>
     <th></th>
@@ -12,7 +13,7 @@
     <td><%= category.name %></td>
     <td><%= link_to 'Show', category %></td>
     <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete, :remote => true %></td>
+    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete  %></td>
   </tr>
 <% end %>
 </table>
