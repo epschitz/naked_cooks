@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'simple_form'
 gem 'jquery-rails'
 gem 'paperclip'
+gem 'tiny_mce'
 #gem 'mysql2'
 
 # Use unicorn as the web server

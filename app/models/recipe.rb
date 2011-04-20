@@ -1,6 +1,6 @@
 class Recipe < ActiveRecord::Base
   has_attached_file :image, 
-                    :styles =>  { :big => ["170x227#", :jpg] },
+                    :styles =>  { :big => ["640x480>"], :thumb => ["200x150#"] },
                     :url  => "/assets/recipes/:id/:style/:basename.:extension",
                     :path => ":rails_root/public/assets/recipes/:id/:style/:basename.:extension"
     
@@ -18,12 +18,7 @@ class Recipe < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :category_id
   
-  
-  #has_attached_file :image, :styles => { :small => "150x150>" }#,
-                    #:url  => "/assets/recipes/:id/:style/:basename.:extension",
-                    #:path => ":rails_root/public/assets/recipes/:id/:style/:basename.:extension"
-
-  #validates_attachment_size :image, :less_than => 5.megabytes
-  #validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
+  validates_attachment_size :image, :less_than => 5.megabytes
+  validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
   
 end

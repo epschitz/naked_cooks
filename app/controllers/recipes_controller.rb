@@ -1,17 +1,19 @@
 class RecipesController < ApplicationController
   
+  uses_tiny_mce
+  
   before_filter :authenticate_user!
   
   respond_to :html, :xml, :json
   
   def index
-    @recipes = Recipe.all    
+    @recipes = Recipe.where('user_id = ?', current_user.id)
     
     respond_with @recipes
   end
   
   def show
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.where('id = ? AND user_id = ?', params[:id], current_user.id).first
     
     respond_with @recipes    
   end
@@ -23,7 +25,7 @@ class RecipesController < ApplicationController
   end
   
   def edit
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.where('id = ? AND user_id = ?', params[:id], current_user.id).first
     
     respond_with @recipes
   end
@@ -45,7 +47,7 @@ class RecipesController < ApplicationController
   end
   
   def update
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.where('id = ? AND user_id = ?', params[:id], current_user.id).first
     @recipe.user_id = current_user.id
     
     respond_to do |format|
@@ -61,7 +63,7 @@ class RecipesController < ApplicationController
   end
   
   def destroy
-    recipe = Recipe.find(params[:id])
+    recipe = Recipe.where('id = ? AND user_id = ?', params[:id], current_user.id).first
     if recipe.destroy
       flash[:notice] = 'The recipe was destroyed'
     else 
