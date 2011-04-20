@@ -1,0 +1,16 @@
+<%= simple_form_for @profile do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this category from being saved:</h2>
+      <ul>
+      <% @profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <%= f.input :name %>       
+    <%= f.button :submit %>  
+  </fieldset>
+<% end %>

@@ -22,4 +22,11 @@ class User < ActiveRecord::Base
   has_many :favorites  
   has_many :friendships 
   
+  after_create :create_user_profile
+  
+  def create_user_profile
+    self.profile = Profile.new()    
+  end
+
+  
 end

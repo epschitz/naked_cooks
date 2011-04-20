@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
   end
   
   def show
-    @recipe = Recipe.where('id = ? AND user_id = ?', params[:id], current_user.id).first
+    @recipe = Recipe.find(params[:id])
     
     respond_with @recipes    
   end
@@ -25,7 +25,7 @@ class RecipesController < ApplicationController
   end
   
   def edit
-    @recipe = Recipe.where('id = ? AND user_id = ?', params[:id], current_user.id).first
+    @recipe = Recipe.where('id = ? AND user_id = ?', params[:id].to_i, current_user.id).first
     
     respond_with @recipes
   end
@@ -47,7 +47,7 @@ class RecipesController < ApplicationController
   end
   
   def update
-    @recipe = Recipe.where('id = ? AND user_id = ?', params[:id], current_user.id).first
+    @recipe = Recipe.where('id = ? AND user_id = ?', params[:id].to_i, current_user.id).first
     @recipe.user_id = current_user.id
     
     respond_to do |format|

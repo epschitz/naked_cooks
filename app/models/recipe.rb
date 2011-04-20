@@ -1,4 +1,4 @@
-class Recipe < ActiveRecord::Base
+class Recipe < ActiveRecord::Base  
   has_attached_file :image, 
                     :styles =>  { :big => ["640x480>"], :thumb => ["200x150#"] },
                     :url  => "/assets/recipes/:id/:style/:basename.:extension",
@@ -9,7 +9,7 @@ class Recipe < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
   
-  before_create do |recipe|
+  before_save do |recipe|
     recipe.permalink = recipe.name.parameterize
   end
   
@@ -20,5 +20,10 @@ class Recipe < ActiveRecord::Base
   
   validates_attachment_size :image, :less_than => 5.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
+  
+  def to_param
+    "#{id}-#{permalink}"
+  end
+  
   
 end

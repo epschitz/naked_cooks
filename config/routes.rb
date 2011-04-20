@@ -1,10 +1,12 @@
 NakedCooks::Application.routes.draw do
   #devise_for :users, :controllers => { :password => "users/password" }
 
-  devise_for :users
+  devise_for :users #, :controllers => { :registrations => "user/registrations" }
 
   resources :categories
   resources :recipes
+  
+  resources :profiles
   
   match 'pages/:action' => 'pages', :as => :pages
   
