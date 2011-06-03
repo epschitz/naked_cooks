@@ -11,4 +11,12 @@ class PagesController < ApplicationController
   def help
   end
   
+  
+  def teste
+    @category = 'Teste';
+  end
+  
+  
+    
+
 end
